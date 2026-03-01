@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Podium — Vote for Cute Dogs. Win $1,000 Weekly.</title>
+  <meta name="description" content="Upload your dog, vote in head-to-head matchups, and compete for $1,000 weekly prizes. Pet Podium — where the cutest dog wins.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-primary: #6C5CE7;
+      --color-primary-dark: #5B4CD4;
+      --color-primary-light: #A29BFE;
+      --color-primary-faded: rgba(108, 92, 231, 0.1);
+      --color-secondary: #00CEC9;
+      --color-accent: #FDCB6E;
+      --color-accent-dark: #F9BF3B;
+      --color-bg: #F8F9FA;
+      --color-surface: #FFFFFF;
+      --color-surface-dark: #F1F3F5;
+      --color-text: #1A1A2E;
+      --color-text-secondary: #6C757D;
+      --color-text-muted: #ADB5BD;
+      --color-border: #E9ECEF;
+      --color-error: #FF6B6B;
+      --color-gold: #FDCB6E;
+      --color-silver: #C0C0C0;
+      --color-bronze: #CD7F32;
+      --color-overlay: rgba(0, 0, 0, 0.5);
+
+      --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.12);
+      --shadow-primary: 0 4px 8px rgba(108, 92, 231, 0.3);
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ========== UTILITIES ========== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 96px 0;
+    }
+
+    .section-alt {
+      background: var(--color-surface);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 64px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: var(--color-text);
+    }
+
+    .section-header p {
+      font-size: 1.125rem;
+      color: var(--color-text-secondary);
+    }
+
+    /* ========== BADGE ========== */
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .badge-purple {
+      background: var(--color-primary-faded);
+      color: var(--color-primary);
+    }
+
+    /* ========== BUTTONS ========== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 1rem;
+      font-family: var(--font-family);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #FFFFFF;
+      box-shadow: var(--shadow-primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--color-primary-faded);
+      transform: translateY(-2px);
+    }
+
+    .btn-lg {
+      padding: 16px 36px;
+      font-size: 1.1rem;
+    }
+
+    .btn-white {
+      background: #FFFFFF;
+      color: var(--color-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-outline-white {
+      background: transparent;
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-outline-white:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 8px;
+      color: var(--color-text);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+    }
+
+    .btn-nav {
+      padding: 10px 24px;
+      font-size: 0.9375rem;
+      background: var(--color-primary);
+      color: #FFFFFF !important;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-primary);
+    }
+
+    .btn-nav:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-1px);
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 160px 0 96px;
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--color-bg) 100%);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--color-text);
+      margin-bottom: 24px;
+    }
+
+    .hero-text h1 span {
+      color: var(--color-primary);
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: var(--color-text-secondary);
+      margin-bottom: 32px;
+      max-width: 480px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+
+    /* ========== PHONE MOCKUP ========== */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+    }
+
+    .phone-mockup {
+      width: 280px;
+      height: 560px;
+      background: var(--color-surface);
+      border-radius: 40px;
+      border: 4px solid #2D3436;
+      padding: 8px;
+      position: relative;
+      box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.15), -5px -5px 20px rgba(255, 255, 255, 0.5);
+    }
+
+    .phone-mockup::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 24px;
+      background: #2D3436;
+      border-radius: 0 0 16px 16px;
+      z-index: 2;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--color-bg);
+      border-radius: 34px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-status-bar {
+      padding: 12px 16px 8px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .phone-header {
+      text-align: center;
+      padding: 8px 16px;
+    }
+
+    .phone-header h4 {
+      font-size: 0.8rem;
+      color: var(--color-text);
+      font-weight: 700;
+    }
+
+    .phone-header p {
+      font-size: 0.625rem;
+      color: var(--color-text-muted);
+    }
+
+    .phone-prize-banner {
+      margin: 8px 12px;
+      padding: 8px 12px;
+      background: linear-gradient(135deg, rgba(253, 203, 110, 0.2), rgba(253, 203, 110, 0.1));
+      border: 1px solid var(--color-accent);
+      border-radius: var(--radius-sm);
+      text-align: center;
+      font-size: 0.625rem;
+      font-weight: 600;
+      color: #D4A017;
+    }
+
+    .phone-vote-area {
+      flex: 1;
+      position: relative;
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vote-main-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      display: block;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .vote-main-wrapper {
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .vote-main-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 8px 12px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .vote-main-overlay span {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+
+    .vote-main-overlay .vote-card-btn {
+      padding: 4px 14px;
+      background: var(--color-primary);
+      color: #FFFFFF;
+      border-radius: var(--radius-full);
+      font-size: 0.5625rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .vote-opponent {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      width: 54px;
+      height: 36px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      z-index: 2;
+    }
+
+    .phone-nav {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-top: 1px solid var(--color-border);
+      background: var(--color-surface);
+    }
+
+    .phone-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-size: 0.5rem;
+      color: var(--color-text-muted);
+    }
+
+    .phone-nav-item.active {
+      color: var(--color-primary);
+    }
+
+    .phone-nav-item .nav-icon {
+      font-size: 0.875rem;
+    }
+
+    /* ========== HOW IT WORKS ========== */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .step-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .step-number {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 28px;
+      height: 28px;
+      background: var(--color-primary-faded);
+      color: var(--color-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8125rem;
+      font-weight: 700;
+    }
+
+    .step-icon {
+      display: block;
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .step-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--color-text);
+    }
+
+    .step-card p {
+      font-size: 0.9375rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ========== FEATURES ========== */
+    .feature-row {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+      margin-bottom: 80px;
+    }
+
+    .feature-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .feature-row-reverse {
+      flex-direction: row-reverse;
+    }
+
+    .feature-visual {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .feature-text {
+      flex: 1;
+    }
+
+    .feature-text h3 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--color-text);
+    }
+
+    .feature-text > p {
+      font-size: 1.0625rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9375rem;
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    .feature-check {
+      width: 24px;
+      height: 24px;
+      background: rgba(0, 206, 201, 0.1);
+      color: var(--color-secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* Feature phone mockups (smaller) */
+    .phone-mockup-sm {
+      width: 240px;
+      height: 480px;
+      background: var(--color-surface);
+      border-radius: 36px;
+      border: 3px solid #2D3436;
+      padding: 6px;
+      position: relative;
+      box-shadow: 16px 16px 48px rgba(0, 0, 0, 0.12);
+    }
+
+    .phone-mockup-sm::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 20px;
+      background: #2D3436;
+      border-radius: 0 0 12px 12px;
+      z-index: 2;
+    }
+
+    .phone-mockup-sm .phone-screen {
+      border-radius: 30px;
+    }
+
+    /* Leaderboard mockup */
+    .leaderboard-list {
+      padding: 8px 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .lb-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      background: var(--color-surface);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .lb-rank {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.625rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      flex-shrink: 0;
+    }
+
+    .lb-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+
+    .lb-name {
+      flex: 1;
+      font-size: 0.625rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .lb-votes {
+      font-size: 0.5625rem;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+
+    /* Prize mockup */
+    .prize-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .prize-trophy {
+      font-size: 3.5rem;
+      margin-bottom: 8px;
+    }
+
+    .prize-amount {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+
+    .prize-label {
+      font-size: 0.6875rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .prize-winner-card {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(253, 203, 110, 0.15), rgba(253, 203, 110, 0.05));
+      border: 1px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .prize-winner-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.125rem;
+    }
+
+    .prize-winner-info {
+      text-align: left;
+    }
+
+    .prize-winner-info .name {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .prize-winner-info .detail {
+      font-size: 0.5625rem;
+      color: var(--color-text-muted);
+    }
+
+
+    /* ========== CTA SECTION ========== */
+    .cta-section {
+      padding: 96px 0;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 50%, #4A3DB8 100%);
+      color: #FFFFFF;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(162, 155, 254, 0.2) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 50%, rgba(0, 206, 201, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-content h2 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .cta-content > p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: var(--color-text);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 64px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 64px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand .nav-logo {
+      color: #FFFFFF;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand > p {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      max-width: 300px;
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .footer-col h4 {
+      color: #FFFFFF;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col a {
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-col a:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      font-size: 0.8125rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background 0.2s ease;
+    }
+
+    .footer-social a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ========== ANIMATIONS ========== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero-visual {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* ========== EMAIL MODAL ========== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-overlay);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--color-surface);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 440px;
+      width: 100%;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      animation: modalIn 0.3s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      line-height: 1;
+      padding: 4px;
+    }
+
+    .modal-close:hover {
+      color: var(--color-text);
+    }
+
+    .modal-card h2 {
+      font-size: 1.5rem;
+      color: var(--color-text);
+      margin-bottom: 8px;
+    }
+
+    .modal-card p {
+      color: var(--color-text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .modal-form {
+      display: flex;
+      gap: 12px;
+    }
+
+    .modal-form input[type="email"] {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: var(--font-family);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .modal-form input[type="email"]:focus {
+      border-color: var(--color-primary);
+    }
+
+    .modal-form button {
+      padding: 12px 24px;
+      background: var(--color-primary);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .modal-form button:hover {
+      background: var(--color-primary-dark);
+    }
+
+    .modal-success {
+      display: none;
+      text-align: center;
+      padding: 16px 0;
+    }
+
+    .modal-success.active {
+      display: block;
+    }
+
+    .modal-success .checkmark {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+
+    .modal-success h3 {
+      font-size: 1.25rem;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+
+    .modal-success p {
+      color: var(--color-text-secondary);
+      margin-bottom: 0;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+      }
+
+      .hero-subtitle {
+        max-width: 100%;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .feature-row,
+      .feature-row-reverse {
+        flex-direction: column;
+        gap: 48px;
+        text-align: center;
+      }
+
+      .feature-list {
+        align-items: center;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 64px 0;
+      }
+
+      .section-header {
+        margin-bottom: 40px;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #FFFFFF;
+        flex-direction: column;
+        padding: 24px;
+        gap: 16px;
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .hero {
+        padding: 120px 0 64px;
+      }
+
+      .footer-links {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .feature-row {
+        margin-bottom: 48px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-lg {
+        width: 100%;
+        text-align: center;
+      }
+
+      .phone-mockup {
+        width: 240px;
+        height: 480px;
+      }
+
+      .phone-mockup-sm {
+        width: 210px;
+        height: 420px;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cta-buttons .btn {
+        width: 100%;
+      }
+
+      .footer-links {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-card {
+        padding: 32px 24px;
+      }
+
+      .modal-form {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">🐾 Pet Podium</a>
+      <button class="nav-toggle" aria-label="Toggle menu" id="navToggle">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#" class="btn btn-nav" onclick="openModal(); return false;">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section id="hero" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <h1>Vote for the Cutest Dog. <span>Win Real Prizes.</span></h1>
+        <p class="hero-subtitle">Upload your pup, vote in head-to-head matchups, and compete for $1,000 every week. It's free to play.</p>
+        <div class="hero-buttons">
+          <a href="#" class="btn btn-primary btn-lg" onclick="openModal(); return false;">Start Voting</a>
+          <a href="#how-it-works" class="btn btn-outline btn-lg">Learn More</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="phone-mockup">
+          <div class="phone-screen">
+            <div class="phone-status-bar">
+              <span>9:41</span>
+              <span>●●●</span>
+            </div>
+            <div class="phone-header">
+              <h4>🐾 Pet Podium</h4>
+              <p>Who's cuter? You decide!</p>
+            </div>
+            <div class="phone-prize-banner">🏆 This week's prize: $1,000</div>
+            <div class="phone-vote-area">
+              <div class="vote-main-wrapper">
+                <img src="images/dog1.jpg" alt="Peaches the dog" class="vote-main-img">
+                <div class="vote-main-overlay">
+                  <span>Peaches</span>
+                  <span class="vote-card-btn">Vote</span>
+                </div>
+              </div>
+              <img src="images/dog2.jpg" alt="Daisy the dog" class="vote-opponent">
+            </div>
+            <div class="phone-nav">
+              <div class="phone-nav-item active">
+                <span class="nav-icon">🏠</span>
+                <span>Home</span>
+              </div>
+              <div class="phone-nav-item">
+                <span class="nav-icon">🗳️</span>
+                <span>Vote</span>
+              </div>
+              <div class="phone-nav-item">
+                <span class="nav-icon">🏆</span>
+                <span>Rank</span>
+              </div>
+              <div class="phone-nav-item">
+                <span class="nav-icon">👤</span>
+                <span>Profile</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOW IT WORKS ========== -->
+  <section id="how-it-works" class="section section-alt">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="badge badge-purple">How It Works</span>
+        <h2>From Photo to Podium in 4 Easy Steps</h2>
+        <p>Getting started takes less than a minute.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card fade-in">
+          <span class="step-number">1</span>
+          <span class="step-icon">📸</span>
+          <h3>Upload Your Dog</h3>
+          <p>Snap a photo of your pup and create their profile in seconds.</p>
+        </div>
+        <div class="step-card fade-in fade-in-delay-1">
+          <span class="step-number">2</span>
+          <span class="step-icon">🗳️</span>
+          <h3>Vote on Matchups</h3>
+          <p>Pick the cutest dog in head-to-head battles. Every vote counts.</p>
+        </div>
+        <div class="step-card fade-in fade-in-delay-2">
+          <span class="step-number">3</span>
+          <span class="step-icon">🏆</span>
+          <h3>Win $1,000</h3>
+          <p>The dog with the most votes each week wins $1,000 in real cash prizes.</p>
+        </div>
+        <div class="step-card fade-in fade-in-delay-3">
+          <span class="step-number">4</span>
+          <span class="step-icon">📣</span>
+          <h3>Invite Friends</h3>
+          <p>Share your dog's profile and rally votes from friends and family.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES ========== -->
+  <section id="features" class="section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="badge badge-purple">Features</span>
+        <h2>Everything You Need to Compete</h2>
+        <p>A fun, fair, and addictive way to find the cutest dog.</p>
+      </div>
+
+      <!-- Feature 1: Voting -->
+      <div class="feature-row fade-in">
+        <div class="feature-visual">
+          <div class="phone-mockup-sm">
+            <div class="phone-screen">
+              <div class="phone-status-bar">
+                <span>9:41</span>
+                <span>●●●</span>
+              </div>
+              <div class="phone-header">
+                <h4>Today's Matchup</h4>
+              </div>
+              <div class="phone-vote-area">
+                <div class="vote-main-wrapper">
+                  <img src="images/dog1.jpg" alt="Charlie the dog" class="vote-main-img">
+                  <div class="vote-main-overlay">
+                    <span>Charlie</span>
+                    <span class="vote-card-btn">Vote</span>
+                  </div>
+                </div>
+                <img src="images/dog2.jpg" alt="Luna the dog" class="vote-opponent">
+              </div>
+              <div class="phone-nav">
+                <div class="phone-nav-item"><span class="nav-icon">🏠</span><span>Home</span></div>
+                <div class="phone-nav-item active"><span class="nav-icon">🗳️</span><span>Vote</span></div>
+                <div class="phone-nav-item"><span class="nav-icon">🏆</span><span>Rank</span></div>
+                <div class="phone-nav-item"><span class="nav-icon">👤</span><span>Profile</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="feature-text">
+          <h3>Head-to-Head Voting</h3>
+          <p>Two dogs enter, one wins. Tap-based voting makes it fast, fun, and addictive. Every vote shapes the weekly leaderboard.</p>
+          <ul class="feature-list">
+            <li><span class="feature-check">✓</span> Instant random matchups</li>
+            <li><span class="feature-check">✓</span> One-tap voting</li>
+            <li><span class="feature-check">✓</span> Fair random pairing algorithm</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature 2: Leaderboard -->
+      <div class="feature-row feature-row-reverse fade-in">
+        <div class="feature-visual">
+          <div class="phone-mockup-sm">
+            <div class="phone-screen">
+              <div class="phone-status-bar">
+                <span>9:41</span>
+                <span>●●●</span>
+              </div>
+              <div class="phone-header">
+                <h4>Leaderboard</h4>
+              </div>
+              <div class="leaderboard-list">
+                <div class="lb-item">
+                  <span class="lb-rank" style="background: var(--color-gold); color: #1A1A2E;">1</span>
+                  <span class="lb-avatar" style="background: linear-gradient(135deg, #FDCB6E, #FF6B6B);">🐕</span>
+                  <span class="lb-name">Peaches</span>
+                  <span class="lb-votes">2,847 votes</span>
+                </div>
+                <div class="lb-item">
+                  <span class="lb-rank" style="background: var(--color-silver);">2</span>
+                  <span class="lb-avatar" style="background: linear-gradient(135deg, #A29BFE, #6C5CE7);">🐩</span>
+                  <span class="lb-name">Luna</span>
+                  <span class="lb-votes">2,634 votes</span>
+                </div>
+                <div class="lb-item">
+                  <span class="lb-rank" style="background: var(--color-bronze); color: #FFFFFF;">3</span>
+                  <span class="lb-avatar" style="background: linear-gradient(135deg, #00CEC9, #6C5CE7);">🐶</span>
+                  <span class="lb-name">Charlie</span>
+                  <span class="lb-votes">2,501 votes</span>
+                </div>
+                <div class="lb-item">
+                  <span class="lb-rank" style="background: var(--color-surface-dark); color: var(--color-text);">4</span>
+                  <span class="lb-avatar" style="background: linear-gradient(135deg, #FF6B6B, #FDCB6E);">🦮</span>
+                  <span class="lb-name">Daisy</span>
+                  <span class="lb-votes">2,199 votes</span>
+                </div>
+                <div class="lb-item">
+                  <span class="lb-rank" style="background: var(--color-surface-dark); color: var(--color-text);">5</span>
+                  <span class="lb-avatar" style="background: linear-gradient(135deg, #6C5CE7, #00CEC9);">🐕‍🦺</span>
+                  <span class="lb-name">Max</span>
+                  <span class="lb-votes">1,987 votes</span>
+                </div>
+              </div>
+              <div class="phone-nav">
+                <div class="phone-nav-item"><span class="nav-icon">🏠</span><span>Home</span></div>
+                <div class="phone-nav-item"><span class="nav-icon">🗳️</span><span>Vote</span></div>
+                <div class="phone-nav-item active"><span class="nav-icon">🏆</span><span>Rank</span></div>
+                <div class="phone-nav-item"><span class="nav-icon">👤</span><span>Profile</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="feature-text">
+          <h3>Live Leaderboard</h3>
+          <p>Watch your dog climb the ranks in real-time. The leaderboard updates instantly as votes pour in from dog lovers everywhere.</p>
+          <ul class="feature-list">
+            <li><span class="feature-check">✓</span> Real-time vote tracking</li>
+            <li><span class="feature-check">✓</span> Weekly rankings reset</li>
+            <li><span class="feature-check">✓</span> Gold, Silver, Bronze podium</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature 3: Prizes -->
+      <div class="feature-row fade-in">
+        <div class="feature-visual">
+          <div class="phone-mockup-sm">
+            <div class="phone-screen">
+              <div class="phone-status-bar">
+                <span>9:41</span>
+                <span>●●●</span>
+              </div>
+              <div class="prize-content">
+                <div class="prize-trophy">🏆</div>
+                <div class="prize-amount">$1,000</div>
+                <div class="prize-label">This Week's Prize</div>
+                <div class="prize-winner-card">
+                  <div class="prize-winner-avatar">🐕</div>
+                  <div class="prize-winner-info">
+                    <div class="name">Peaches wins!</div>
+                    <div class="detail">Owned by Sarah M. — 2,847 votes</div>
+                  </div>
+                </div>
+              </div>
+              <div class="phone-nav">
+                <div class="phone-nav-item"><span class="nav-icon">🏠</span><span>Home</span></div>
+                <div class="phone-nav-item"><span class="nav-icon">🗳️</span><span>Vote</span></div>
+                <div class="phone-nav-item active"><span class="nav-icon">🏆</span><span>Rank</span></div>
+                <div class="phone-nav-item"><span class="nav-icon">👤</span><span>Profile</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="feature-text">
+          <h3>Real Cash Prizes</h3>
+          <p>Every week, the #1 dog wins $1,000 in real cash. Runners-up get featured on our homepage and social media channels.</p>
+          <ul class="feature-list">
+            <li><span class="feature-check">✓</span> $1,000 weekly grand prize</li>
+            <li><span class="feature-check">✓</span> Verified winners</li>
+            <li><span class="feature-check">✓</span> Prizes paid within 48 hours</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== CTA ========== -->
+  <section id="download" class="cta-section">
+    <div class="container cta-content">
+      <h2>Ready to Find Out if Your Dog is the Cutest?</h2>
+      <p>Pet Podium is launching soon. Be the first to know.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-white btn-lg" onclick="openModal(); return false;">Get Early Access</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <span class="nav-logo">🐾 Pet Podium</span>
+        <p>The cutest competition on the internet. Upload your dog, vote on matchups, and win $1,000 every week.</p>
+      </div>
+      <div class="footer-links" style="justify-self: end; text-align: right;">
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Contest Rules</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Pet Podium. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Twitter">𝕏</a>
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="TikTok">🎵</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Email Signup Modal -->
+  <div class="modal-overlay" id="emailModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modalFormState">
+        <h2>We're Almost Ready!</h2>
+        <p>Pet Podium isn't live yet. Drop your email and we'll notify you the moment it launches.</p>
+        <form class="modal-form" action="https://docs.google.com/forms/d/1sJIOzEvvADMobc2Pw8CpTwb8qwm3YlVrYdBToEduv7A/formResponse" method="POST" target="hidden_iframe" onsubmit="handleSubmit()">
+          <input type="email" name="entry.1057455709" placeholder="you@email.com" required>
+          <button type="submit">Notify Me</button>
+        </form>
+      </div>
+      <div class="modal-success" id="modalSuccessState">
+        <div class="checkmark">&#10003;</div>
+        <h3>You're on the list!</h3>
+        <p>We'll let you know as soon as Pet Podium launches.</p>
+      </div>
+    </div>
+  </div>
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+  <script>
+    // Modal functions
+    function openModal() {
+      document.getElementById('emailModal').classList.add('active');
+      document.getElementById('modalFormState').style.display = '';
+      document.getElementById('modalSuccessState').classList.remove('active');
+    }
+
+    function closeModal() {
+      document.getElementById('emailModal').classList.remove('active');
+    }
+
+    function handleSubmit() {
+      setTimeout(function() {
+        document.getElementById('modalFormState').style.display = 'none';
+        document.getElementById('modalSuccessState').classList.add('active');
+      }, 300);
+    }
+
+    // Close modal on overlay click
+    document.getElementById('emailModal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    });
+
+    // Close nav on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.textContent = '☰';
+      });
+    });
+
+    // Navbar shadow on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  </script>
+</body>
+</html>
