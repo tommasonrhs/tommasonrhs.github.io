@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contest Rules — Pet Podium</title>
+  <meta name="description" content="Pet Podium Official Contest Rules. Learn about eligibility, entry requirements, prizes, and more.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-primary: #6C5CE7;
+      --color-primary-dark: #5B4CD4;
+      --color-primary-light: #A29BFE;
+      --color-primary-faded: rgba(108, 92, 231, 0.1);
+      --color-secondary: #00CEC9;
+      --color-accent: #FDCB6E;
+      --color-accent-dark: #F9BF3B;
+      --color-bg: #F8F9FA;
+      --color-surface: #FFFFFF;
+      --color-surface-dark: #F1F3F5;
+      --color-text: #1A1A2E;
+      --color-text-secondary: #6C757D;
+      --color-text-muted: #ADB5BD;
+      --color-border: #E9ECEF;
+      --color-error: #FF6B6B;
+      --color-overlay: rgba(0, 0, 0, 0.5);
+
+      --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.12);
+      --shadow-primary: 0 4px 8px rgba(108, 92, 231, 0.3);
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ========== UTILITIES ========== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 8px;
+      color: var(--color-text);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+    }
+
+    .btn-nav {
+      padding: 10px 24px;
+      font-size: 0.9375rem;
+      background: var(--color-primary);
+      color: #FFFFFF !important;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-primary);
+    }
+
+    .btn-nav:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-1px);
+    }
+
+    /* ========== LEGAL PAGE CONTENT ========== */
+    .legal-page {
+      padding: 120px 0 96px;
+    }
+
+    .legal-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .legal-breadcrumb {
+      margin-bottom: 32px;
+    }
+
+    .legal-breadcrumb a {
+      font-size: 0.9375rem;
+      color: var(--color-primary);
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .legal-breadcrumb a:hover {
+      color: var(--color-primary-dark);
+    }
+
+    .legal-content h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      color: var(--color-text);
+    }
+
+    .legal-updated {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+      margin-bottom: 48px;
+    }
+
+    .legal-content h2 {
+      font-size: 1.375rem;
+      font-weight: 700;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      color: var(--color-text);
+    }
+
+    .legal-content h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 12px;
+      color: var(--color-text);
+    }
+
+    .legal-content p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .legal-content ul,
+    .legal-content ol {
+      list-style: disc;
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .legal-content ol {
+      list-style: decimal;
+    }
+
+    .legal-content li {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--color-text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .legal-content a {
+      color: var(--color-primary);
+    }
+
+    .legal-content a:hover {
+      color: var(--color-primary-dark);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: var(--color-text);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 64px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 64px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand .nav-logo {
+      color: #FFFFFF;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand > p {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      max-width: 300px;
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .footer-col h4 {
+      color: #FFFFFF;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col a {
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-col a:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      font-size: 0.8125rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background 0.2s ease;
+    }
+
+    .footer-social a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .legal-page {
+        padding: 100px 0 64px;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #FFFFFF;
+        flex-direction: column;
+        padding: 24px;
+        gap: 16px;
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .footer-links {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">🐾 Pet Podium</a>
+      <button class="nav-toggle" aria-label="Toggle menu" id="navToggle">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html" class="btn btn-nav">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== CONTENT ========== -->
+  <section class="legal-page">
+    <div class="container legal-content">
+      <div class="legal-breadcrumb">
+        <a href="index.html">&larr; Back to Home</a>
+      </div>
+      <h1>Official Contest Rules</h1>
+      <p class="legal-updated">Last updated: February 28, 2026</p>
+
+      <p><strong>NO PURCHASE NECESSARY TO ENTER OR WIN. A PURCHASE WILL NOT INCREASE YOUR CHANCES OF WINNING.</strong></p>
+
+      <h2>1. Eligibility</h2>
+      <p>The PetPodium Weekly Photo Contest ("Contest") is open to legal residents of the United States who are 18 years of age or older at the time of entry. Employees of PetPodium and their immediate family members are not eligible.</p>
+
+      <h2>2. Contest Period</h2>
+      <p>Each Contest runs weekly from Monday at 12:00 AM PT to Sunday at 11:59 PM PT ("Contest Period"). A new Contest begins each Monday.</p>
+
+      <h2>3. How to Enter</h2>
+      <p>To enter:</p>
+      <ol>
+        <li>Download the PetPodium app and create an account</li>
+        <li>Complete the required voting activity (vote on 3 photo matchups)</li>
+        <li>Upload a photo of your pet</li>
+      </ol>
+      <p>Limit: One (1) entry per person per Contest Period, unless you have earned a bonus entry through our referral program (maximum 2 entries per week with referral bonus).</p>
+
+      <h2>4. Entry Requirements</h2>
+      <p>All photos must:</p>
+      <ul>
+        <li>Feature your own pet (you must be the pet's owner or have permission from the owner)</li>
+        <li>Be appropriate for all ages (no offensive, violent, or inappropriate content)</li>
+        <li>Not contain watermarks, logos, or promotional material</li>
+        <li>Not infringe on any third party's intellectual property rights</li>
+      </ul>
+
+      <h2>5. Voting</h2>
+      <ul>
+        <li>All registered users may vote on photo matchups</li>
+        <li>Users must complete 3 votes to unlock their upload capability</li>
+        <li>Votes are final and cannot be changed</li>
+        <li>Manipulating votes through fake accounts, bots, or other fraudulent means will result in disqualification</li>
+      </ul>
+
+      <h2>6. Winner Determination</h2>
+      <p>The entry with the most votes at the end of each Contest Period will be declared the winner. In the event of a tie, the entry submitted first will win.</p>
+
+      <h2>7. Prizes</h2>
+      <p>Weekly Grand Prize: <strong>$1,000 USD</strong></p>
+      <p>Prize will be awarded via PayPal, Venmo, or other electronic payment method as determined by the Sponsor. Winners are responsible for all applicable taxes.</p>
+
+      <h2>8. Winner Notification and Verification</h2>
+      <p>Winners will be notified via the app and/or email within 48 hours of the Contest Period ending. Winners must:</p>
+      <ol>
+        <li>Respond to notification within 7 days</li>
+        <li>Submit a verification photo showing their pet with their username and current date written on paper</li>
+        <li>Provide valid payment information</li>
+      </ol>
+      <p>Failure to complete verification within 7 days may result in forfeiture of the prize.</p>
+
+      <h2>9. Fraud Prevention</h2>
+      <p>We reserve the right to disqualify any entry and ban any user who:</p>
+      <ul>
+        <li>Creates multiple accounts</li>
+        <li>Uses automated voting methods</li>
+        <li>Submits photos of pets they do not own</li>
+        <li>Engages in vote manipulation or collusion</li>
+        <li>Violates any Contest Rules or <a href="terms-of-service.html">Terms of Service</a></li>
+      </ul>
+
+      <h2>10. Content License</h2>
+      <p>By entering, you grant PetPodium a non-exclusive, worldwide, royalty-free license to use your submitted photo for promotional and marketing purposes.</p>
+
+      <h2>11. Publicity</h2>
+      <p>Except where prohibited by law, winners agree to allow their username, photo, and general location (city/state) to be used for promotional purposes without additional compensation.</p>
+
+      <h2>12. Limitation of Liability</h2>
+      <p>PetPodium is not responsible for:</p>
+      <ul>
+        <li>Lost, late, incomplete, or misdirected entries</li>
+        <li>Technical failures or malfunctions</li>
+        <li>Any injury or damage arising from participation in the Contest</li>
+      </ul>
+
+      <h2>13. Disputes</h2>
+      <p>All disputes will be resolved by PetPodium in its sole discretion. All decisions are final and binding.</p>
+
+      <h2>14. Governing Law</h2>
+      <p>This Contest is governed by the laws of the State of California.</p>
+
+      <h2>15. Sponsor</h2>
+      <p>PetPodium</p>
+      <p>Email: <a href="mailto:tom@petpodiumapp.com">tom@petpodiumapp.com</a></p>
+
+      <h2>16. Winner List</h2>
+      <p>For a list of winners, send a request to <a href="mailto:tom@petpodiumapp.com">tom@petpodiumapp.com</a> within 30 days of the Contest Period ending.</p>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">🐾 Pet Podium</a>
+        <p>The cutest competition on the internet. Upload your dog, vote on matchups, and win $1,000 every week.</p>
+      </div>
+      <div class="footer-links" style="justify-self: end; text-align: right;">
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+            <li><a href="contest-rules.html">Contest Rules</a></li>
+            <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Pet Podium. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/petpodiumapp/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+        <a href="https://www.tiktok.com/@petpodiumapp" aria-label="TikTok"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.textContent = '☰';
+      });
+    });
+
+    // Navbar shadow on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+  </script>
+</body>
+</html>

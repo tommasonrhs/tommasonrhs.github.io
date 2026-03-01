@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Pet Podium</title>
+  <meta name="description" content="Pet Podium Privacy Policy. Learn how we collect, use, and protect your personal information.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-primary: #6C5CE7;
+      --color-primary-dark: #5B4CD4;
+      --color-primary-light: #A29BFE;
+      --color-primary-faded: rgba(108, 92, 231, 0.1);
+      --color-secondary: #00CEC9;
+      --color-accent: #FDCB6E;
+      --color-accent-dark: #F9BF3B;
+      --color-bg: #F8F9FA;
+      --color-surface: #FFFFFF;
+      --color-surface-dark: #F1F3F5;
+      --color-text: #1A1A2E;
+      --color-text-secondary: #6C757D;
+      --color-text-muted: #ADB5BD;
+      --color-border: #E9ECEF;
+      --color-error: #FF6B6B;
+      --color-overlay: rgba(0, 0, 0, 0.5);
+
+      --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.12);
+      --shadow-primary: 0 4px 8px rgba(108, 92, 231, 0.3);
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ========== UTILITIES ========== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 8px;
+      color: var(--color-text);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+    }
+
+    .btn-nav {
+      padding: 10px 24px;
+      font-size: 0.9375rem;
+      background: var(--color-primary);
+      color: #FFFFFF !important;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-primary);
+    }
+
+    .btn-nav:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-1px);
+    }
+
+    /* ========== LEGAL PAGE CONTENT ========== */
+    .legal-page {
+      padding: 120px 0 96px;
+    }
+
+    .legal-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .legal-breadcrumb {
+      margin-bottom: 32px;
+    }
+
+    .legal-breadcrumb a {
+      font-size: 0.9375rem;
+      color: var(--color-primary);
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .legal-breadcrumb a:hover {
+      color: var(--color-primary-dark);
+    }
+
+    .legal-content h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      color: var(--color-text);
+    }
+
+    .legal-updated {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+      margin-bottom: 48px;
+    }
+
+    .legal-content h2 {
+      font-size: 1.375rem;
+      font-weight: 700;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      color: var(--color-text);
+    }
+
+    .legal-content h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 12px;
+      color: var(--color-text);
+    }
+
+    .legal-content p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .legal-content ul,
+    .legal-content ol {
+      list-style: disc;
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .legal-content ol {
+      list-style: decimal;
+    }
+
+    .legal-content li {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--color-text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .legal-content a {
+      color: var(--color-primary);
+    }
+
+    .legal-content a:hover {
+      color: var(--color-primary-dark);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: var(--color-text);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 64px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 64px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand .nav-logo {
+      color: #FFFFFF;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand > p {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      max-width: 300px;
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .footer-col h4 {
+      color: #FFFFFF;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col a {
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-col a:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      font-size: 0.8125rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background 0.2s ease;
+    }
+
+    .footer-social a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .legal-page {
+        padding: 100px 0 64px;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #FFFFFF;
+        flex-direction: column;
+        padding: 24px;
+        gap: 16px;
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .footer-links {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">🐾 Pet Podium</a>
+      <button class="nav-toggle" aria-label="Toggle menu" id="navToggle">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html" class="btn btn-nav">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== CONTENT ========== -->
+  <section class="legal-page">
+    <div class="container legal-content">
+      <div class="legal-breadcrumb">
+        <a href="index.html">&larr; Back to Home</a>
+      </div>
+      <h1>Privacy Policy</h1>
+      <p class="legal-updated">Last updated: February 28, 2026</p>
+
+      <p>PetPodium ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application.</p>
+
+      <h2>Information We Collect</h2>
+
+      <h3>Personal Information</h3>
+      <p>When you create an account, we collect:</p>
+      <ul>
+        <li>Email address</li>
+        <li>Username</li>
+        <li>Password (encrypted)</li>
+      </ul>
+
+      <h3>Automatically Collected Information</h3>
+      <p>When you use the app, we automatically collect:</p>
+      <ul>
+        <li>Device information (device type, operating system)</li>
+        <li>Device identifiers for fraud prevention</li>
+        <li>Usage data (pages viewed, features used, time spent)</li>
+        <li>Push notification tokens (if you enable notifications)</li>
+      </ul>
+
+      <h3>User-Generated Content</h3>
+      <ul>
+        <li>Photos you upload of your pets</li>
+        <li>Votes you cast</li>
+        <li>Reports you submit about other content</li>
+      </ul>
+
+      <h2>How We Use Your Information</h2>
+      <p>We use the information we collect to:</p>
+      <ul>
+        <li>Create and manage your account</li>
+        <li>Process contest entries and prize payments</li>
+        <li>Send push notifications (with your permission)</li>
+        <li>Prevent fraud and enforce contest rules</li>
+        <li>Improve our app and user experience</li>
+        <li>Communicate with you about your account or prizes</li>
+        <li>Respond to your inquiries and support requests</li>
+      </ul>
+
+      <h2>Sharing Your Information</h2>
+      <p>We may share your information in the following situations:</p>
+      <ul>
+        <li>With service providers who help us operate the app (cloud hosting, payment processing, analytics)</li>
+        <li>To comply with legal obligations or respond to lawful requests</li>
+        <li>To protect our rights, privacy, safety, or property</li>
+        <li>In connection with a merger, acquisition, or sale of assets</li>
+        <li>With your consent</li>
+      </ul>
+      <p>We do NOT sell your personal information to third parties.</p>
+
+      <h2>Public Information</h2>
+      <p>When you upload a photo, your username and photo become visible to other users. Vote counts are also publicly displayed on the leaderboard.</p>
+
+      <h2>Data Retention</h2>
+      <p>We retain your personal information for as long as your account is active or as needed to provide services. You may request deletion of your account by contacting us at <a href="mailto:tom@petpodiumapp.com">tom@petpodiumapp.com</a>.</p>
+
+      <h2>Security</h2>
+      <p>We implement reasonable security measures to protect your information. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+
+      <h2>Children's Privacy</h2>
+      <p>PetPodium is not intended for children under 13. We do not knowingly collect information from children under 13. If we learn we have collected such information, we will delete it promptly.</p>
+
+      <h2>Your Rights</h2>
+      <p>Depending on your location, you may have the right to:</p>
+      <ul>
+        <li>Access the personal information we hold about you</li>
+        <li>Correct inaccurate information</li>
+        <li>Delete your personal information</li>
+        <li>Object to or restrict processing of your information</li>
+        <li>Data portability</li>
+      </ul>
+      <p>To exercise these rights, contact us at <a href="mailto:tom@petpodiumapp.com">tom@petpodiumapp.com</a>.</p>
+
+      <h2>Push Notifications</h2>
+      <p>You may opt out of push notifications by adjusting your device settings or within the app.</p>
+
+      <h2>Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last Updated" date.</p>
+
+      <h2>Contact Us</h2>
+      <p>If you have questions about this Privacy Policy, please contact us at:</p>
+      <p>Email: <a href="mailto:tom@petpodiumapp.com">tom@petpodiumapp.com</a></p>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">🐾 Pet Podium</a>
+        <p>The cutest competition on the internet. Upload your dog, vote on matchups, and win $1,000 every week.</p>
+      </div>
+      <div class="footer-links" style="justify-self: end; text-align: right;">
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+            <li><a href="contest-rules.html">Contest Rules</a></li>
+            <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Pet Podium. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/petpodiumapp/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+        <a href="https://www.tiktok.com/@petpodiumapp" aria-label="TikTok"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.textContent = '☰';
+      });
+    });
+
+    // Navbar shadow on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+  </script>
+</body>
+</html>
